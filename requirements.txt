@@ -6,5 +6,7 @@ python-dotenv
 requests
 scikit-learn
 sentence-transformers
+torch
+transformers
 
 
