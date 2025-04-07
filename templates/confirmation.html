@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview Confirmation</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0A1D3C;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .card {
+            background-color: #1F2A44;
+            padding: 30px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: #ffe680;
+        }
+
+        a {
+            color: #ffe680;
+            text-decoration: underline;
+        }
+
+        /* Celebration image styling */
+        .celebration-img {
+            max-width: 300px;
+            margin-bottom: 30px;
+        }
+
+        /* Aesthetic popup styling */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            color: #0A1D3C;
+            padding: 30px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            font-size: 16px;
+            font-weight: 600;
+            z-index: 9999;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .popup button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ffe600;
+            color: #0A1D3C;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #ffdd00;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Interview Scheduled!</h2>
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Date & Time:</strong> {{ dt }}</p>
+        <p><strong>Meeting Link:</strong> <a href="{{ link }}" target="_blank">{{ link }}</a></p>
+    </div>
+
+    {% if message %}
+    <div class="popup" id="popup">
+        {{ message }}
+        <br>
+        <button onclick="document.getElementById('popup').style.display='none'">Close</button>
+    </div>
+
+    <script>
+        window.onload = function () {
+            document.getElementById('popup').style.display = 'block';
+        };
+    </script>
+    {% endif %}
+
+</body>
+</html>

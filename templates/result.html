@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matching Results</title>
+    <style>
+        body {
+            background-color: #0c1b33; /* Dark blue background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Stylish white header with yellow accent */
+        .header {
+            max-width: 700px;
+            background-color: white;
+            margin: 60px auto 30px;
+            padding: 30px 30px;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #0c1b33; /* Dark blue text */
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .underline {
+            width: 120px;
+            height: 6px;
+            background-color: #FFD700; /* Yellow */
+            margin: 15px auto 0;
+            border-radius: 4px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto 60px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            color: black;
+        }
+
+        .candidate {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #0c1b33;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #001f3f;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 1.2em;
+            padding: 40px;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with yellow underline -->
+    <div class="header">
+        <h1>Top Talent Matches</h1>
+        <div class="underline"></div>
+    </div>
+
+    <!-- Candidate Matching Container -->
+    <div class="container">
+        {% if matches %}
+            {% for name, email, score in matches %}
+                <div class="candidate">
+                    <p><strong>Name:</strong> {{ name }}</p>
+                    <p><strong>Email:</strong> {{ email }}</p>
+                    <p><strong>Match:</strong> {{ "%.2f"|format(score) }}%</p>
+                    <a href="{{ url_for('schedule_interview', email=email) }}" class="button">Schedule Interview</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-results">
+                No top candidates for this role.
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

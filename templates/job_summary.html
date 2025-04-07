@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HireSmart Job Summary</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #fff;
+      color: #001f3f;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      background-color: #001f3f;
+      color: white;
+      padding: 20px 40px;
+      font-size: 28px;
+      font-weight: bold;
+      border-bottom: 5px solid #FFD700;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .big-bold {
+      font-size: 28px;
+      font-weight: 700;
+      color: #001f3f;
+      margin-bottom: 20px;
+    }
+
+    .wavy-tagline {
+      font-size: 1.3em;
+      margin: 10px 0 40px;
+      font-weight: 600;
+      color: #001f3f;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease-in-out;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .wavy-tagline.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .wavy-tagline span {
+      display: inline-block;
+      animation: wave 2.2s infinite ease-in-out;
+      animation-delay: calc(0.1s * var(--i));
+      color: #001f3f
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    form {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 6px;
+      font-weight: bold;
+      color: #001f3f;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input[type="submit"], button {
+      margin-top: 25px;
+      padding: 12px 28px;
+      font-size: 16px;
+      background-color: #FFD700;
+      color: #001f3f;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover, button:hover {
+      background-color: #e6c200;
+    }
+
+    .summary-box {
+      background-color: #ffffff;
+      border-left: 6px solid #FFD700;
+      box-shadow: 0 4px 20px rgba(0, 31, 63, 0.08);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .summary-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 31, 63, 0.15);
+    }
+
+    .summary-box h3 {
+      color: #001f3f;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .summary-box p {
+      margin: 0 0 10px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+  <div class="header">HireSmart</div>
+
+  <div class="container">
+    
+    <!-- Bold Statement -->
+    <div class="big-bold">
+      Great hires start with great descriptions — we’ve got you covered!
+    </div>
+
+    <!-- Wavy Tagline -->
+    <div class="wavy-tagline">
+      <span style="--i:0;">S</span>
+      <span style="--i:1;">u</span>
+      <span style="--i:2;">m</span>
+      <span style="--i:3;">m</span>
+      <span style="--i:4;">a</span>
+      <span style="--i:5;">r</span>
+      <span style="--i:6;">i</span>
+      <span style="--i:7;">z</span>
+      <span style="--i:8;">e</span>
+      <span style="--i:9;">.</span>
+      <span style="--i:10;">&nbsp;</span>
+      <span style="--i:11;">S</span>
+      <span style="--i:12;">i</span>
+      <span style="--i:13;">m</span>
+      <span style="--i:14;">p</span>
+      <span style="--i:15;">l</span>
+      <span style="--i:16;">i</span>
+      <span style="--i:17;">f</span>
+      <span style="--i:18;">y</span>
+      <span style="--i:19;">.</span>
+      <span style="--i:20;">&nbsp;</span>
+      <span style="--i:21;">H</span>
+      <span style="--i:22;">i</span>
+      <span style="--i:23;">r</span>
+      <span style="--i:24;">e</span>
+      <span style="--i:25;">&nbsp;</span>
+      <span style="--i:26;">s</span>
+      <span style="--i:27;">m</span>
+      <span style="--i:28;">a</span>
+      <span style="--i:29;">r</span>
+      <span style="--i:30;">t</span>
+      <span style="--i:31;">e</span>
+      <span style="--i:32;">r</span>
+      <span style="--i:33;">.</span>
+    </div>
+
+    <div class="container">
+      <form action="{{ url_for('job_summary') }}" method="POST">
+          <label for="title">Job Title:</label><br>
+          <input type="text" id="title" name="title" value="{{ title }}" required><br><br>
+
+          <label for="job_description">Job Description:</label><br>
+          <textarea id="job_description" name="job_description" rows="6" cols="50" required>{{ original }}</textarea><br><br>
+
+          <button type="submit">Craft Summary</button>
+      </form>
+      {% if summary %}
+    <div class="summary-box">
+      <h3>Job Summary:</h3>
+      <p>{{ summary }}</p>
+
+      {% if responsibilities %}
+      <h3>Responsibilities:</h3>
+      <p>{{ responsibilities }}</p>
+      {% endif %}
+
+      {% if skills %}
+      <h3>Skills Required:</h3>
+      <p>{{ skills }}</p>
+      {% endif %}
+
+      {% if experience %}
+      <h3>Experience:</h3>
+      <p>{{ experience }}</p>
+      {% endif %}
+
+      {% if qualification %}
+      <h3>Qualifications:</h3>
+      <p>{{ qualification }}</p>
+      {% endif %}
+    </div>
+    
+      
+    
+    
+
+      <form action="{{ url_for('result') }}" method="POST">
+          <input type="hidden" name="title" value="{{ title }}">
+          <input type="hidden" name="summary" value="{{ summary }}">
+          <input type="hidden" name="responsibilities" value="{{ responsibilities }}">
+          <input type="hidden" name="skills" value="{{ skills }}">
+          <input type="hidden" name="experience" value="{{ experience }}">
+          <input type="hidden" name="qualification" value="{{ qualification }}">
+          <button type="submit">Top Talent Match</button>
+      </form>
+      {% endif %}
+  </div>
+
+  <script>
+    window.onload = () => {
+      document.querySelector('.wavy-tagline').classList.add('visible');
+    };
+  </script>
+
+</body>
+</html>

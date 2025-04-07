@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Interview</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0A1D3C;
+            margin: 0;
+            padding: 0;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            color: #ffe680; /* Light yellow */
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #1F2A44;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin: 15px 0 5px;
+            font-size: 0.95rem;
+            color: #ccc;
+        }
+
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #32415e;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #ffe680;
+            color: #0A1D3C;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        a {
+            color: #ffe680;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bold Main Heading -->
+    <div class="main-heading">
+        Let’s Get You Closer to the Right Hire!
+    </div>
+
+    <div class="form-container">
+        <h2>Schedule Interview with</h2>
+        <p><strong>{{ email }}</strong></p>
+
+        <form method="post">
+            <label for="date">Date:</label>
+            <input type="date" name="date" required>
+
+            <label for="time">Time:</label>
+            <input type="time" name="time" required>
+
+            <button type="submit">Confirm Interview</button>
+        </form>
+    </div>
+
+</body>
+</html>
