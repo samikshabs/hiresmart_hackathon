@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 load_dotenv()  # Load environment variables from .env file
 
 # === Lazy Load + Cache the Model ===
-_model = None
+# Lazy-load the model to avoid memory issues
+_model = None  # Define it at module level
 
 def embedder(text):
     global _model
@@ -17,6 +18,7 @@ def embedder(text):
         return embedding.tolist()  # Convert to list for JSON serialization
     except Exception as e:
         return f"❌ Error generating embedding: {e}"
+
 
 # === 1. Generate Job Summary using LLaMA-3 ===
 def generate_summary_with_llama3(title, description):
