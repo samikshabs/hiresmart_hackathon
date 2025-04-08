@@ -13,7 +13,7 @@ def embedder(text):
     try:
         if _model is None:
             from sentence_transformers import SentenceTransformer
-            _model = SentenceTransformer('all-MiniLM-L6-v2')
+            _model = SentenceTransformer('paraphrase-albert-small-v2')
         embedding = _model.encode(text, convert_to_numpy=True)
         return embedding.tolist()  # Convert to list for JSON serialization
     except Exception as e:
