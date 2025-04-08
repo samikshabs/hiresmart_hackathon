@@ -3,15 +3,18 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()  # Load environment variables from .env file
-from sentence_transformers import SentenceTransformer
 
-# Load the model once globally to reuse it
-model = SentenceTransformer('all-MiniLM-L6-v2')  # You can try other models too
+# === Lazy Load + Cache the Model ===
+_model = None
 
 def embedder(text):
+    global _model
     try:
-        embedding = model.encode(text, convert_to_numpy=True)
-        return embedding.tolist()  # Keep it consistent with previous JSON response
+        if _model is None:
+            from sentence_transformers import SentenceTransformer
+            _model = SentenceTransformer('all-MiniLM-L6-v2')
+        embedding = _model.encode(text, convert_to_numpy=True)
+        return embedding.tolist()  # Convert to list for JSON serialization
     except Exception as e:
         return f"❌ Error generating embedding: {e}"
 
@@ -55,6 +58,3 @@ Job Description: {description}
         return response.json()["choices"][0]["message"]["content"]
     except Exception as e:
         return f"❌ Error generating summary: {e}"
-
-
-
